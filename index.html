@@ -1,6 +1,34 @@
 <div id="divId" onclick="myFunction()">Click Me</div>
 <div id="divId2"></div>
 
+In my Team Software class here at Michigan Tech, we're finishing up <a href="https://sortinghat.azurewebsites.net/">Sorting Hat</a>, a tool that sorts teams after teammate preferences have been gathered via survey.
+
+The web app sorts the students into teams using a genetic algorithm optimized on the preferences of the students. I wanted to add a feature that said "Out of 1,345,500 possible arrangements, we've found the following:". The following details how I calculated this number.
+
+The problem: Given x people in the population, how many different ways can you split them into y teams? The teams are as close in size as possible.
+
+The first step I took was to create an array describing how many people are on each team. This is simple enough, just distribute the players evenly until you are out of players.
+<pre class="default prettyprint prettyprinted"><code><span class="pun">[</span><span class="pln">sourcecode language</span><span class="pun">=</span><span class="str">"csharp"</span><span class="pun">]</span></code></pre>
+<p class="p1"><span class="s1">int</span>[] teamSizes = <span class="s1">new</span> <span class="s1">int</span>[numTeams];</p>
+<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">int</span> pop = popSize;</p>
+<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">int</span> idx = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">while</span> (pop &gt; 0)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>teamSizes[idx++ % numTeams] += 1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>pop -= 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+
+<pre class="default prettyprint prettyprinted"><code>
+<span class="pun">[/</span><span class="pln">sourcecode</span><span class="pun">]</span></code></pre>
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+
 <script>
 	function myFunction(){
 		document.getElementById("divId").style.color = "red";
