@@ -1,33 +1,64 @@
-<div id="divId" onclick="myFunction()">Click Me</div>
-<div id="divId2"></div>
 
-In my Team Software class here at Michigan Tech, we're finishing up <a href="https://sortinghat.azurewebsites.net/">Sorting Hat</a>, a tool that sorts teams after teammate preferences have been gathered via survey.
+<head>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
 
-The web app sorts the students into teams using a genetic algorithm optimized on the preferences of the students. I wanted to add a feature that said "Out of 1,345,500 possible arrangements, we've found the following:". The following details how I calculated this number.
+<div align="center">
+<img class="profileImage" src="hunting_jacket.JPG" alt="Mountain View" align="middle">
+</div>
 
-The problem: Given x people in the population, how many different ways can you split them into y teams? The teams are as close in size as possible.
+<h1 align="center">I'm Mark Halonen</h1>
+<hr>
+<h3>I'm currently a pursuing a bachelors degree in computer science at Michigan Tech in Houghton, Michigan. I graduate in May 2016, and I'm looking for opportunities in the field of data science.</h3>
+<ul id="nav">
+    <li><a class="header-logo-invertocat" target="_blank" href="https://github.com/markhalonen" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
+<svg aria-hidden="true" class="octicon octicon-mark-github" height="28" version="1.1" viewBox="0 0 16 16" width="28"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+</a><a href="https://github.com/markhalonen" target="_blank" >Github</a></li>
+    <li><a href="https://docs.google.com/document/d/1x3uX8W7JlkhAaDj_iYhTTJL3gxmXUH9P1QGRAhZGDwQ/edit?usp=sharing" target="_blank" >Resume</a></li>
+    <li><a href="https://markhalonen.wordpress.com/" target="_blank" >Blog</a></li>
+    <li><a href="https://www.linkedin.com/in/mark-halonen-31a923b3" target="_blank" >LinkedIn</a></li>
+</ul>
 
-The first step I took was to create an array describing how many people are on each team. This is simple enough, just distribute the players evenly until you are out of players.
-<pre class="default prettyprint prettyprinted"><code><span class="pun">[</span><span class="pln">sourcecode language</span><span class="pun">=</span><span class="str">"csharp"</span><span class="pun">]</span></code></pre>
-<p class="p1"><span class="s1">int</span>[] teamSizes = <span class="s1">new</span> <span class="s1">int</span>[numTeams];</p>
-<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">int</span> pop = popSize;</p>
-<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">int</span> idx = 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span><span class="s1">while</span> (pop &gt; 0)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                </span>teamSizes[idx++ % numTeams] += 1;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>pop -= 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<h2>Projects</h2>
+<h3>SUREPulse</h3>
+<p class="project-description">I wrote most of <a href="https://relinc.net/software">this</a> java application. In August 2015, me and a coworker made the decision to replace the existing data analysis software with a whole new one. It's now April 2016, and we are putting finishing touches on the application. It is open source, the code can be found <a href="https://github.com/relinc">here</a>. I've been working at <a href="https://relinc.net">REL</a> since June 2014. I also wrote an HMI for an industrial waterjet in C# at this company.</p>
+<h3>Sorting Hat</h3>
+<p class="project-description">We built <a href="https://relinc.net/software">Sorting Hat</a> in the Spring 2016 semester in Team Software. I ideated the project and the name. I implemented a genetic algorithm to sort the teams and worked with C# MVC for the first time.</p>
+<h2>Education</h2>
+<ul>
+<li class="schoolListItem">Michigan Technological University
+<ul>
+	<li>Computer Science</li>
+	<li>3.84 GPA, 4.0 Department</li>
+</ul>
+</li>
+<li class="schoolListItem">Brighton High School
+<ul>
+	<li>4.25 GPA</li>
+	<li>43 college credits earned through 10 AP Exams</li>
+	<li>Valedictorian of 440 <br/><iframe width="420" height="315"
+src="http://www.youtube.com/embed/qG9GpicqJQk">
+</iframe></li>
+</ul>
+</li>
+</ul>
+<h2>Skills</h2>
+<h3>Best At</h3>
+<ul id="nav2">
+    <li>Java</li>
+    <li>C#</li>
+</ul>
+<h3>Decent At</h3>
+<ul id="nav2">
+    <li>Python</li>
+    <li>Web</li>
+</ul>
 
-<pre class="default prettyprint prettyprinted"><code>
-<span class="pun">[/</span><span class="pln">sourcecode</span><span class="pun">]</span></code></pre>
-&nbsp;
 
-&nbsp;
 
-&nbsp;
 
-&nbsp;
-
+<!-- <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="Mountain View" style="width:304px;height:228px;"> -->
 
 <script>
 	function myFunction(){
@@ -35,3 +66,6 @@ The first step I took was to create an array describing how many people are on e
 		document.getElementById("divId2").innerHTML = "<a href=https://sortinghat.azurewebsites.net/>Check Out Sorting Hat</a>"
 	}
 </script>
+
+
+
