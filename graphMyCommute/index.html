@@ -1,0 +1,40 @@
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.14.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/heatmap.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+	<script type="text/javascript"
+  		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACkmZ4IrO-VdUWo0shVv7zsLsKid731Dc&libraries=geometry">
+	</script>
+
+
+
+	<script src="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+
+<h1>Graph My Commute</h1>
+<div>
+	Home Address: <input type="text" id="home_address"></input> <br/>
+	Work Address: <input type="text" id="work_address"></input> <br/>
+	<button onclick="chartFunction()">Go!</button>
+	This Takes about 30 seconds.
+</div>
+
+<script>
+	function myFunction() {
+    	var home_address = document.getElementById("home_address").value
+    	var work_address = document.getElementById("work_address").value
+    	alert(home_address)
+    	alert(work_address)
+	}
+</script>
+
+
+
+<div id="container"></div>
+
+
