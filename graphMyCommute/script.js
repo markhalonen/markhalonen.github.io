@@ -121,7 +121,7 @@ function createChart(){
         chart: {
             type: 'heatmap',
             marginTop: 40,
-            marginBottom: 40
+            spacingBottom: 40,
         },
 
 
@@ -160,6 +160,7 @@ function createChart(){
                     this.point.value + '</b> items on <br><b>' + this.series.yAxis.categories[this.point.y] + '</b>';
             }
         },
+        
 
         series: [{
             name: 'Sales per employee',
@@ -172,7 +173,7 @@ function createChart(){
                     textShadow: 'none'
                 }
             }
-        }]
+        },]
 
     });
 }
@@ -186,7 +187,7 @@ function callAWS(originAddress, departureAddress, leaveTimeMillis){
     
     //payload = '{"origin" : "{0}" , "destination" : "{1}"}'.format(home_address, work_address);
     payload = {origin : home_address , destination : work_address, departureTime : leaveTimeMillis}
-    if(homeDepartureTimeIdx == homeDepartureTimes.length - 1) //Haha
+    if(homeDepartureTimeIdx == globalHomeDepartureTimes.length) //Haha
         payload = {origin : work_address , destination : home_address, departureTime : leaveTimeMillis}
     console.log(payload);
 
