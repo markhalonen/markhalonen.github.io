@@ -10,15 +10,22 @@ var timeZoneConvert = 0;
 var home_address = ""
 var work_address = ""
 
+function nextWeekDay(){
+    var now = new Date(); 
+    while (now.getDay() == 6 || now.getDay() == 0) //weekend = no traffic
+        now.setDate(now.getDate() + 1);
+    return now;
+}
+
 function getHomeDepartureTimes(){
     homeDepartureTimes = [];
 
-    var today = new Date(Date.now());
+    var today = nextWeekDay();
     
     for(var i = 1; i < 20; i++){
         var minutes = mins[(i - 1) % 4];
         
-        homeDepartureTimes[i - 1] = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 6 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
+        homeDepartureTimes[i - 1] = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 6 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
     }
     return homeDepartureTimes
 }
@@ -26,12 +33,12 @@ function getHomeDepartureTimes(){
 function getWorkDepartureTimes(){
     workDepartureTimes = [];
 
-    var today = new Date(Date.now());
+    var today = nextWeekDay();
 
     for(var i = 1; i < 20; i++){
         var minutes = mins[(i - 1) % 4];
         
-        workDepartureTimes[i-1] = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1, 12 + 3 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
+        workDepartureTimes[i-1] = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12 + 3 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
     }
     return workDepartureTimes
 }
@@ -182,7 +189,13 @@ function createChart(){
 
 function callAWS(originAddress, departureAddress, leaveTimeMillis){
     AWS.config.update({region: 'us-east-1'});
-    AWS.config.update({accessKeyId: 'AKIAIL5ZI255TUJOR7TQ', secretAccessKey: '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'});
+    insaneLevelEncryption1 = "OnMuyhxyd2+SuhQZ0V9";
+    insaneLevelEncryption2 = "xKrZG978+TmhmijgheroP";
+    secret = insaneLevelEncryption1 + insaneLevelEncryption2;
+    part1 = "AKIAINKQOM";
+    part2 = "V57VAY5ZZQ";
+    sum = part1 + part2;
+    AWS.config.update({accessKeyId: sum, secretAccessKey: secret});
     var lambda = new AWS.Lambda();
     
     //payload = '{"origin" : "{0}" , "destination" : "{1}"}'.format(home_address, work_address);

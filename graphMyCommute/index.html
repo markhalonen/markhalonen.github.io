@@ -16,24 +16,20 @@
 </head>
 
 
-<h1>Graph My Commute</h1>
-<div>
+<h1 class="title">Graph My Commute</h1>
+<div class="controlsArea">
+	<div class="inputArea">
 	Home Address: <input type="text" id="home_address"></input> <br/>
-	Work Address: <input type="text" id="work_address"></input> <br/>
-	<button onclick="chartFunction()">Go!</button>
-	This Takes about 30 seconds.
 </div>
+	<div class = "inputArea">
+	Work Address: <input type="text" id="work_address"></input> <br/>
+</div>
+</br>
+</br>
 
-<script>
-	function myFunction() {
-    	var home_address = document.getElementById("home_address").value
-    	var work_address = document.getElementById("work_address").value
-    	alert(home_address)
-    	alert(work_address)
-	}
-</script>
-
-
+	<button class="button" onclick="chartFunction()">Go!</button>
+	This takes about 30 seconds.
+</div>
 
 <div id="container"></div>
 
