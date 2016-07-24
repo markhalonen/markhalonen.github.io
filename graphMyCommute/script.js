@@ -237,6 +237,11 @@ var awsCallback = function(err, data) {
             
         }
 
+        var obj= document.getElementById('progress-bar');
+        var percentage = (homeDepartureTimeIdx + workDepartureTimeIdx) / (globalHomeDepartureTimes.length + globalWorkDepartureTimes.length);
+        percentage = percentage * 100;
+        obj.style.width= percentage.toString() + "%";
+
         if(homeDepartureTimeIdx != globalHomeDepartureTimes.length)
         {
             callAWS(home_address, work_address, globalHomeDepartureTimes[homeDepartureTimeIdx].getTime());
