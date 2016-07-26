@@ -11,7 +11,8 @@ var home_address = ""
 var work_address = ""
 
 function nextWeekDay(){
-    var now = new Date(); 
+    var now = new Date();
+    now.setDate(now.getDate() + 1);
     while (now.getDay() == 6 || now.getDay() == 0) //weekend = no traffic
         now.setDate(now.getDate() + 1);
     return now;
