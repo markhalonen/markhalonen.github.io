@@ -4,9 +4,9 @@ function callAWS(originAddress, departureAddress, leaveTimeMillis, travelTime){
 	console.log("callAWS has begun");
 
 	var home_address = originAddress;
-	home_address = "1011 13th Ave SE Minneapolis, MN 55414"
+	//home_address = "1011 13th Ave SE Minneapolis, MN 55414"
 	var work_address = departureAddress
-	work_address = "7655 Commerce Way Eden Prairie, MN 55344"
+	//work_address = "7655 Commerce Way Eden Prairie, MN 55344"
 
 	AWS.config.update({region: 'us-east-1'});
 	AWS.config.update({accessKeyId: 'AKIAIL5ZI255TUJOR7TQ', secretAccessKey: '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'});
