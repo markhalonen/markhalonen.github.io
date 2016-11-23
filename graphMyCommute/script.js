@@ -23,7 +23,7 @@ function getHomeDepartureTimes(){
 
     var today = nextWeekDay();
     
-    for(var i = 1; i < 20; i++){
+    for(var i = 1; i < 3; i++){
         var minutes = mins[(i - 1) % 4];
         
         homeDepartureTimes[i - 1] = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 6 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
@@ -36,7 +36,7 @@ function getWorkDepartureTimes(){
 
     var today = nextWeekDay();
 
-    for(var i = 1; i < 20; i++){
+    for(var i = 1; i < 3; i++){
         var minutes = mins[(i - 1) % 4];
         
         workDepartureTimes[i-1] = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12 + 3 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
@@ -124,6 +124,8 @@ function createChart(){
             xAxisCategories[i] = globalWorkDepartureTimes[i].toLocaleTimeString().slice(0, -6) + "pm";
         }
 
+        console.log("Done building chart data.\n");
+
         $('#container').highcharts({
         
         chart: {
@@ -184,6 +186,7 @@ function createChart(){
         },]
 
     });
+    console.log("Done creating chart.");
 }
 
 
@@ -209,16 +212,13 @@ function callAWS(originAddress, departureAddress, leaveTimeMillis){
         FunctionName: 'arn:aws:lambda:us-east-1:815393274756:function:graphCommute', /* required */
         Payload: JSON.stringify(payload),
     };
-    locked = true;
     lambda.invoke(params, awsCallback);
-
 }
 
 var awsCallback = function(err, data) {
     if (err){
         console.log("ERRROR");
-        console.log(err, err.stack); // an error occurred
-        locked = false;
+        //console.log(err, err.stack); // an error occurred
     }
     else{
         travelTime = data["Payload"];// successful response
@@ -252,22 +252,24 @@ var awsCallback = function(err, data) {
             callAWS(work_address, home_address, globalWorkDepartureTimes[workDepartureTimeIdx].getTime());
         }
         else{
+            console.log("Creating chart");
             createChart();
+
         }
       
     }
 }
 
 // First, checks if it isn't implemented yet.
-if (!String.prototype.format) {
-  String.prototype.format = function() {
-    var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) { 
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-      ;
-    });
-  };
-}
+// if (!String.prototype.format) {
+//   String.prototype.format = function() {
+//     var args = arguments;
+//     return this.replace(/{(\d+)}/g, function(match, number) { 
+//       return typeof args[number] != 'undefined'
+//         ? args[number]
+//         : match
+//       ;
+//     });
+//   };
+// }
 
