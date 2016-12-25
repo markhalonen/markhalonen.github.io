@@ -1,0 +1,76 @@
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script>
+	function calculateAge()
+	{
+		wage = parseFloat(document.getElementById("wage").value.replace(",", ""));
+		raiseRate = parseFloat(document.getElementById("raiseRate").value.replace(",", ""));
+		yearsSchool = parseFloat(document.getElementById("yearsSchool").value.replace(",", ""));
+		schoolCost = parseFloat(document.getElementById("schoolCost").value.replace(",", ""));
+		salary = parseFloat(document.getElementById("salary").value.replace(",", ""));
+		noSchool = [0]
+		school = [0]
+		years = 0;
+		while(1)
+		{
+			noSchool[noSchool.length] = noSchool[noSchool.length - 1] + 50*40*wage;
+			wage = wage + raiseRate;
+
+			if(years < yearsSchool)
+			{
+				school[school.length] = school[school.length-1] - schoolCost;
+			}
+			else
+			{
+				school[school.length] = school[school.length-1] + salary;
+			}
+			if(school[school.length-1] > noSchool[noSchool.length-1] || years > 10)
+			{
+				break;
+			}
+			years = years + 1;
+			console.log("School :" + school);
+			console.log("No School :" + noSchool);
+		}
+		document.getElementById("ageToBreakEven").innerHTML = 18 + years;
+
+// 		<table border="1">
+// <tr>
+// <td>Row 1, Column 1</td>
+// <td>Row 1, Column 2</td>
+// </tr>
+// <tr>
+// <td>Row 2, Column 1</td>
+// <td>Row 2, Column 2</td>
+// </tr>
+// </table>
+		body = '<table border="1" cellpadding="5" cellspacing="5"><tr><td>Year</td><td>School</td><td>No School</td></tr>';
+		for(i = 1; i < school.length; i++)
+		{
+			body = body + '<tr><td>'+ i + '</td><td>' + school[i].toLocaleString() + '</td><td>' + noSchool[i].toLocaleString() + '</td></tr>';
+		}
+		document.getElementById("details").innerHTML = body;
+	}
+</script>
+
+<h1 align="center">School Break Even</h1>
+<h3 align="center">When will you break even if you go to school?</h3>
+<form style="margin: 0; padding: 0;" action="javascript:calculateAge()">
+  <p>
+    If you don't go school, you make $
+    <input style="display: inline;" type="text" value="12" id="wage" class="style-5"/>
+    /hour with 
+    <input style="display: inline;" type="text" value="1" id="raiseRate"/>
+     dollar raises per year. With 
+    <input style="display: inline;" type="text" value="4" id="yearsSchool"/>
+    years of school costing $
+    <input style="display: inline;" type="text" value="5,000" id="schoolCost"/>
+    per year to get a salary of 
+    <input style="display: inline;" type="text" value="60,000" id="salary"/>
+    , you will break even if you work full-time until you are <p id="ageToBreakEven"></p> years old.
+    <input style="display: inline;" type="submit" value="Calculate" onclick="calculateAge"/>
+  </p>
+</form>
+
+<p id="details"></p>
