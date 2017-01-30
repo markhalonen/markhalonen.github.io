@@ -23,7 +23,7 @@ function getHomeDepartureTimes(){
 
     var today = nextWeekDay();
     
-    for(var i = 1; i < 3; i++){
+    for(var i = 1; i < 20; i++){
         var minutes = mins[(i - 1) % 4];
         
         homeDepartureTimes[i - 1] = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 6 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
@@ -36,7 +36,7 @@ function getWorkDepartureTimes(){
 
     var today = nextWeekDay();
 
-    for(var i = 1; i < 3; i++){
+    for(var i = 1; i < 20; i++){
         var minutes = mins[(i - 1) % 4];
         
         workDepartureTimes[i-1] = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12 + 3 + (i - 1) / 4 + timeZoneConvert, minutes, 0, 0);
@@ -60,23 +60,9 @@ function chartFunction () {
     workDepartureTimeIdx = 0;
     doneWithh2w = false;
 
-
-
-    // homeDepartureTimes = getHomeDepartureTimes();
-    // workDepartureTimes = getWorkDepartureTimes();
     globalHomeDepartureTimes = getHomeDepartureTimes();
     globalWorkDepartureTimes = getWorkDepartureTimes();
-    console.log(globalHomeDepartureTimes);
-    console.log(globalWorkDepartureTimes);
-    //console.log("Home Departure Times: ");
 
-    // for(var i = 0; i < globalHomeDepartureTimes.length; i++){
-    //     console.log(homeDepartureTimes[i].getHours() + " : " + homeDepartureTimes[i].getMinutes());
-    // }
-    // console.log("Work departure times: ");
-    // for(var i = 0; i < workDepartureTimes.length; i++){
-    //     console.log(workDepartureTimes[i].getHours() + " : " + workDepartureTimes[i].getMinutes());
-    // }
 
     globalh2w = []
     globalw2h = []
@@ -87,24 +73,15 @@ function chartFunction () {
 
     callAWS(home_address, work_address, globalHomeDepartureTimes[0].getTime());
 
-    // for(var i = 0; i < globalHomeDepartureTimes.length; i++){
-    //     callAWS(home_address, work_address, globalHomeDepartureTimes[i].getTime());
-    // }
-
-    // for(var i = 0; i < globalHomeDepartureTimes.length; i++){
-    //     callAWS(work_address, home_address, globalWorkDepartureTimes[i].getTime());
-    // }
-
-    
-
-
 };
 
 function createChart(){
         chartData = []
         var idx = 0;
+
         for(var i = 0; i < globalw2h.length; i++){
             for(var j = 0; j < globalh2w.length; j++){
+
                 sublist = [];
                 sublist[0] = j; // X-axis is home to work
                 sublist[1] = i; // Y-axis is work to home
@@ -113,7 +90,6 @@ function createChart(){
                 chartData[idx] = sublist;
                 idx = idx + 1;
             }
-            idx = idx + 1;
         }
 
         yAxisCategories = [];
@@ -124,7 +100,6 @@ function createChart(){
             xAxisCategories[i] = globalWorkDepartureTimes[i].toLocaleTimeString().slice(0, -6) + "pm";
         }
 
-        console.log("Done building chart data.\n");
 
         $('#container').highcharts({
         
@@ -186,7 +161,7 @@ function createChart(){
         },]
 
     });
-    console.log("Done creating chart.");
+
 }
 
 
@@ -206,7 +181,7 @@ function callAWS(originAddress, departureAddress, leaveTimeMillis){
     payload = {origin : home_address , destination : work_address, departureTime : leaveTimeMillis}
     if(homeDepartureTimeIdx == globalHomeDepartureTimes.length) //Haha
         payload = {origin : work_address , destination : home_address, departureTime : leaveTimeMillis}
-    console.log(payload);
+
 
     var params = {
         FunctionName: 'arn:aws:lambda:us-east-1:815393274756:function:graphCommute', /* required */
@@ -218,21 +193,21 @@ function callAWS(originAddress, departureAddress, leaveTimeMillis){
 var awsCallback = function(err, data) {
     if (err){
         console.log("ERRROR");
-        //console.log(err, err.stack); // an error occurred
+        console.log(err, err.stack); // an error occurred
     }
     else{
         travelTime = data["Payload"];// successful response
-        console.log(travelTime);
+
         if(homeDepartureTimeIdx != globalHomeDepartureTimes.length)
         {
-            console.log("Filling h2w at idx: " + homeDepartureTimeIdx);
+
             globalh2w[homeDepartureTimeIdx] = travelTime;
             homeDepartureTimeIdx = homeDepartureTimeIdx + 1;
             
         }
         else if(workDepartureTimeIdx != globalWorkDepartureTimes.length)
         {
-            console.log("Filling w2h at idx: " + workDepartureTimeIdx);
+
             globalw2h[workDepartureTimeIdx] = travelTime;
             workDepartureTimeIdx = workDepartureTimeIdx + 1;
             
@@ -252,7 +227,7 @@ var awsCallback = function(err, data) {
             callAWS(work_address, home_address, globalWorkDepartureTimes[workDepartureTimeIdx].getTime());
         }
         else{
-            console.log("Creating chart");
+
             createChart();
 
         }
