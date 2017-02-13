@@ -1,3 +1,4 @@
+image-orientation: inherit;
 body {
     background-color: #eee;
     margin-left: 60px;
@@ -32,6 +33,30 @@ body {
 	font-size: 20px;
 }
 
-img {
-    image-orientation: from-image;
+figure {
+    text-align: center;
+    display: table;
+    max-height: 10px; /* demo; set some amount (px or %) if you can */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:20px;
+}
+
+figure figcaption {
+    margin-top:10px;
+}
+
+figure img {
+    image-orientation: 90deg;
+    max-height: 40%;
+    max-width: 40%;
+    margin-right: 10px;
+    margin-bottom:10px;
+}
+
+figure .svg {
+    max-height: 90%;
+    max-width: 70%;
+    margin-right: 10px;
+    margin-bottom:10px;
 }
